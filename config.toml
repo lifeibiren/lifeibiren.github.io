@@ -1,5 +1,5 @@
-baseURL = "https://ghostapple.top"
-title = "GhostApple's Main Page"
+baseURL = "https://lifeibiren.github.io"
+title = "lifeibiren.github.io"
 languageCode = "zh-cn"
 DefaultContentLanguage = "en" # Change this to change the site's language
 theme = "hugo.386"
@@ -7,7 +7,7 @@ preserveTaxonomyNames = true
 
 [params]
     # The name to display as main title in the home page
-    mainpagetitle = "GHOSTAPPLE"
+    mainpagetitle = "lifeibiren's Blog"
 
     # The subtitle to display under the title in the home page
     mainpagesubtitle = "一个菜鸡码农的博客" 
@@ -16,7 +16,7 @@ preserveTaxonomyNames = true
     mainpagedesc = "爱好写C++的Archlinux初级用户"
 
     # The name to display in the copyright section in the footer
-    copyrightname = "GhostApple"
+    copyrightname = "lifeibiren"
 
     # The url to use as link in the copyright name in the footer. Leave empty to use none.
 #     copyrighturl = "http://jmf-portfolio.netlify.com"
