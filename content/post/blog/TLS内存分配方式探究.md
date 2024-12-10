@@ -10,7 +10,7 @@ categories = "blog"
 +++
 
 事情的起因是，需要将一堆代码编译生成动态链接库（以前是直接生成 executable），在加载的时候报错。
-翻查资料发现是跟 TLS 变量的大小和编译代码时使用的 TLS Model 有关系，在 initial-exec 模式下总大小超过 2048 字节就会产生这个错误。简化之后的问题模型如下：
+翻查资料发现是跟 TLS 变量的大小和编译代码时使用的 TLS Model 有关系，在 initial-exec 模式下总大小超过 2048 字节（这个说法不精确，具体细节请参考[libc-tls.c](https://github.com/lattera/glibc/blob/895ef79e04a953cac1493863bcae29ad85657ee1/csu/libc-tls.c#L57)）就会产生这个错误。简化之后的问题模型如下：
 
 1.动态库so
 ```
