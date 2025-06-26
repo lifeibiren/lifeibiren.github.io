@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on lifeibiren&#39;s blog</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on lifeibiren&#39;s blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Jun 2025 00:30:49 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows上使用Qt自带MinGW编译Boost</title>
+      <link>http://localhost:1313/post/windows%E4%B8%8A%E4%BD%BF%E7%94%A8qt%E8%87%AA%E5%B8%A6mingw%E7%BC%96%E8%AF%91boost/windows%E4%B8%8A%E4%BD%BF%E7%94%A8qt%E8%87%AA%E5%B8%A6mingw%E7%BC%96%E8%AF%91boost/</link>
+      <pubDate>Fri, 27 Jun 2025 00:24:02 +0800</pubDate>
+      <guid>http://localhost:1313/post/windows%E4%B8%8A%E4%BD%BF%E7%94%A8qt%E8%87%AA%E5%B8%A6mingw%E7%BC%96%E8%AF%91boost/windows%E4%B8%8A%E4%BD%BF%E7%94%A8qt%E8%87%AA%E5%B8%A6mingw%E7%BC%96%E8%AF%91boost/</guid>
+      <description>&lt;h1 id=&#34;环境&#34;&gt;环境&lt;/h1&gt;&#xA;&lt;p&gt;MinGW: 7.3.0 64-bit&#xA;Boost: 1.79.0&lt;/p&gt;&#xA;&lt;h1 id=&#34;步骤&#34;&gt;步骤&lt;/h1&gt;&#xA;&lt;p&gt;1.首先解压 boost 源代码到任意目录中&lt;/p&gt;&#xA;&lt;p&gt;2.打开 cmd，并 cd 到 boost 源代码所在目录&lt;/p&gt;&#xA;&lt;p&gt;3.临时设置环境变量 PATH 为 MinGW 的目录&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SET PATH=C:\Qt\Qt5.14.2\Tools\mingw730_64\bin&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;4.直接执行 bootstrap.bat 发现指定的 TOOLSET 并没有起作用。因此需要稍微修改一下&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/20250626223432.png&#34; alt=&#34;20250626223432.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;5.执行 bootstrap.bat 并生成 b2.exe&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.\bootstrap.bat gcc&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;6.使用 b2.exe 编译&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.\b2.exe gcc&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>TLS内存分配方式探究</title>
+      <link>http://localhost:1313/post/tls%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F%E6%8E%A2%E7%A9%B6/tls%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F%E6%8E%A2%E7%A9%B6/</link>
+      <pubDate>Tue, 20 Aug 2024 01:13:00 +0800</pubDate>
+      <guid>http://localhost:1313/post/tls%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F%E6%8E%A2%E7%A9%B6/tls%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F%E6%8E%A2%E7%A9%B6/</guid>
+      <description>&lt;p&gt;事情的起因是，需要将一堆代码编译生成动态链接库（以前是直接生成 executable），在加载的时候报错。&#xA;翻查资料发现是跟 TLS 变量的大小和编译代码时使用的 TLS Model 有关系，在 initial-exec 模式下总大小超过 2048 字节（这个说法不精确，具体细节请参考&lt;a href=&#34;https://github.com/lattera/glibc/blob/895ef79e04a953cac1493863bcae29ad85657ee1/csu/libc-tls.c#L57&#34;&gt;libc-tls.c&lt;/a&gt;）就会产生这个错误。简化之后的问题模型如下：&lt;/p&gt;&#xA;&lt;p&gt;1.动态库so&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat &amp;gt; test_tls.cpp &amp;lt;&amp;lt;&amp;lt; EOF&#xA;thread_local char buf[2048];&#xA;&#xA;int foo() {&#xA;    return buf[0];&#xA;}&#xA;EOF&#xA;&#xA;$ g++ -shared -fpic -ftls-model=initial-exec -o libtest_tls.so&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;2.加载动态库的程序&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cat &amp;gt; loadso.cpp &amp;lt;&amp;lt;&amp;lt; EOF&#xA;#include &amp;lt;dlfcn.h&amp;gt;&#xA;#include &amp;lt;stdio.h&amp;gt;&#xA;&#xA;int main() {&#xA;    if (!dlopen(&amp;#34;libtest_tls.so&amp;#34;, RTLD_NOW | RTLD_GLOBAL)) {&#xA;        printf(&amp;#34;%s\n&amp;#34;, dlerror());&#xA;    }&#xA;    return 0;&#xA;}&#xA;EOF&#xA;&#xA;$ c++ loadso.cpp -o loadso&#xA;$ LD_LIBRARY_PATH=./ ./a.out&#xA;./libtest_tls.so: cannot allocate memory in static TLS block&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在 gcc 的手册中有这样的描述：&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
