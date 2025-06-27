@@ -6,8 +6,8 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 
 [params]
-  author = "lifeibiren"
-  description = "菜狗"
+  #author = "lifeibiren"
+  description = "一只菜狗"
   github = "lifeibiren"
 #  facebook = "MeiK2333"
 #  twitter = "MeiK2333"
@@ -15,7 +15,7 @@ pygmentsUseClasses = true
 #  instagram = "MeiK2333"
 #  tumblr = "MeiK2333"
   email = "lifeibiren@gmail.com"
-  url = "https://lifeibiren.github.io/"
+  url = "https://www.github.com/lifeibiren"
   keywords = "C++,C,GNU,blog"
   rss = true
   lastmod = true
