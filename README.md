@@ -1,1 +1,7 @@
-These are the files necessary for the theme to work. Just copy the files in the root of your hugo site installation and edit the files as you want.
+# 关于
+
+本博客使用 [Hugo](https://gohugo.io/) 构建。
+
+未经允许，请勿转载。
+
+Please DO NOT repost without permission.
