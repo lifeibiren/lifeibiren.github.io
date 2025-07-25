@@ -1,7 +1,12 @@
 ---
-title: "关于Proxy的各种姿势"
+title: "关于 Proxy 的各种姿势"
 date: 2025-06-28T02:20:38+08:00
+categories: "blog"
+summary: "记录一下 Proxy 的各种设置方式"
+tags:
+  - linux
 ---
+
 
 # Notes
 

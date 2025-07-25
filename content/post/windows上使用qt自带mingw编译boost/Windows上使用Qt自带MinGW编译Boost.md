@@ -1,6 +1,9 @@
 ---
-title: "Windows上使用Qt自带MinGW编译Boost"
+title: "Windows 上使用 Qt 自带 MinGW 编译 Boost"
 date: 2025-06-27T00:24:02+08:00
+categories: "blog"
+tags: [ "mingw" ]
+summary: "MinGW 总是会有各种莫名其妙的问题"
 ---
 
 # 环境
