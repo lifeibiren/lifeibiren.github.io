@@ -4,7 +4,7 @@ date: 2025-06-28T02:20:38+08:00
 categories: "blog"
 summary: "记录一下 Proxy 的各种设置方式"
 tags:
-  - linux
+  - Linux
 ---
 
 

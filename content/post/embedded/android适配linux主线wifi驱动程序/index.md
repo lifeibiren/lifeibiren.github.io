@@ -2,9 +2,9 @@
 title: "Android 适配 Linux 主线 WiFi 驱动程序"
 date: 2025-07-31T16:18:09+08:00
 tags:
-    - "linux"
-    - "android"
-    - "embeded"
+    - "Linux"
+    - "Android"
+    - "Embedded"
 categories: "blog"
 ---
 

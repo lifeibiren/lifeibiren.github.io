@@ -4,7 +4,7 @@ date = "2024-08-20T01:13:00+08:00"
 description = "TLS 内存分配方式探究"
 tags = [
     "libc",
-    "linux",
+    "Linux",
 ]
 categories = "blog"
 +++
